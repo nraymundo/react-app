@@ -1,0 +1,46 @@
+.SearchForm {
+  width: 40vw;
+}
+
+.SearchContent {
+  display: flex;
+  flex-direction: row;
+}
+
+#Search {
+  width: 90vw;
+  border-radius: 5%;
+  padding-left: 20px;
+  padding-right: 30px;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 20px;
+  font-family: "SF Pro Display", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: black;
+
+  /* width: 200px;
+  height: 20px;
+  padding-right: 50px; */
+}
+
+#Search::-webkit-input-placeholder {
+  color: black;
+}
+
+#SearchButton {
+  width: 25vw;
+  margin-left: -50px;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 20px;
+  font-family: "SF Pro Display", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: black;
+
+  /* margin-left: -50px;
+  height: 20px;
+  width: 50px; */
+}
