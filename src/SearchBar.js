@@ -9,7 +9,7 @@ function getId(query) {
   console.log(query);
 }
 
-function SearchBar() {
+function SearchBar({ setCurrDisplay }) {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [photo, setPhoto] = useState([]);
@@ -46,7 +46,12 @@ function SearchBar() {
           placeholder={"Search photos"}
         />
         {/* <input type="submit" id="SearchButton" value="Search" /> */}
-        <button id="SearchButton" type="submit" disabled={!query}>
+        <button
+          id="SearchButton"
+          type="button"
+          disabled={!query}
+          onClick={() => setCurrDisplay("search")}
+        >
           Search
         </button>
       </div>
