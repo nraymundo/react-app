@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./SearchBar.css";
 
+import SearchResults from "./SearchResults";
+import searchTeams from "./api";
+
+function getId(query) {
+  console.log(query);
+}
+
 function SearchBar() {
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+  const [photo, setPhoto] = useState([]);
+
+  const handleQueryChange = event => setQuery(event.target.value);
+
+  const performQuery = async event => {
+    event.preventDefault();
+
+    setError(null);
+
+    try {
+      const result = await searchTeams({
+        // team: getId(query),
+        category: "search"
+      });
+      setPhoto(result);
+    } catch (error) {
+      setError("Sorry, that photo doesn't exist.");
+    }
+  };
+
   return (
-    <form className="SearchForm">
+    <form className="SearchForm" onSubmit={performQuery}>
       <div className="SearchContent">
         {/* <input type="submit" id="SearchButton" /> */}
         <input
@@ -12,15 +41,20 @@ function SearchBar() {
           name="query"
           type="text"
           autoComplete="off"
-          //   value={query}
-          //   onChange={handleQueryChange}
+          value={query}
+          onChange={handleQueryChange}
           placeholder={"Search photos"}
         />
-        <input type="submit" id="SearchButton" value="Search" />
-        {/* <button id="SearchButton" type="submit">
+        {/* <input type="submit" id="SearchButton" value="Search" /> */}
+        <button id="SearchButton" type="submit" disabled={!query}>
           Search
-        </button> */}
+        </button>
       </div>
+
+      {error && <div className="error">{error}</div>}
+      {console.log(photo)}
+
+      <SearchResults info={photo} />
     </form>
   );
 }
