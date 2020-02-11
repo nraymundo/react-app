@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import PhotoCarousel from "./PhotoCarousel";
 
 function App() {
+  console.log(process.env);
   return (
     <div className="App">
       <div className="Header">
