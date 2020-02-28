@@ -9,7 +9,7 @@ function getId(query) {
   console.log(query);
 }
 
-function SearchBar() {
+export default function SearchBar() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [photo, setPhoto] = useState([]);
@@ -73,5 +73,3 @@ function SearchBar() {
     </form>
   );
 }
-
-export default SearchBar;

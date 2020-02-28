@@ -6,7 +6,7 @@ import Main from "./Main";
 import SearchBar from "./SearchBar";
 import PhotoCarousel from "./PhotoCarousel";
 
-function Home({ setCurrDisplay }) {
+export default function Home({ setCurrDisplay }) {
   return (
     <div className="Home">
       <div className="HomeHeader">
@@ -21,5 +21,3 @@ function Home({ setCurrDisplay }) {
     </div>
   );
 }
-
-export default Home;

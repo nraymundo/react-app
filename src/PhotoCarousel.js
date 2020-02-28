@@ -3,7 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 import "./PhotoCarousel.css";
 
-function PhotoCarousel() {
+export default function PhotoCarousel() {
   return (
     <div>
       <Carousel className="HomeCarousel">
@@ -32,5 +32,3 @@ function PhotoCarousel() {
     </div>
   );
 }
-
-export default PhotoCarousel;
