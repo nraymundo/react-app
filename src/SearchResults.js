@@ -4,6 +4,7 @@ import React from "react";
 
 // import TeamData from "./TeamData";
 import PhotoData from "./PhotoData";
+import "./Grid.css";
 
 const SearchResults = props => (
   <div className="SearchResults">

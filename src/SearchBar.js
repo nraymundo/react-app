@@ -9,22 +9,46 @@ function getId(query) {
   console.log(query);
 }
 
+const UnsplashImage = ({ url, key }) => (
+  <div className="image-item" key={key}>
+    <img src={url} />
+  </div>
+);
+
 export default function SearchBar() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [photo, setPhoto] = useState([]);
+  const [loaded, setIsLoaded] = React.useState(false);
 
+  let Grid = () => {
+    [photo, setPhoto] = React.useState([]);
+    [loaded, setIsLoaded] = React.useState(false);
+
+    React.useEffect(() => {
+      fetchAPI();
+    }, []);
+  };
+
+  const apiRoot = "https://api.unsplash.com";
   const apiKey =
     "a920466e5973644c09180f9583b9cb3b409c600d84fd46f025946ca2ebb23f7f";
 
-  const fetchAPI = event => {
+  const fetchAPI = (event, count = 7) => {
     event.preventDefault();
-    let api = `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${query}&per_page=4`;
+    console.log("here bitch");
+    let api = `${apiRoot}/search/photos/?client_id=${apiKey}&query=${query}&page=${Math.floor(
+      Math.random() * 20
+    ) + 1}&per_page=${count}`;
     fetch(api)
       .then(response => response.json())
       .then(content => {
         console.log("content" + content.results[0].urls);
+        setIsLoaded(true);
         setPhoto(content.results);
+      })
+      .catch(e => {
+        console.log(e);
       });
   };
 
@@ -65,10 +89,14 @@ export default function SearchBar() {
       {error && <div className="error">{error}</div>}
 
       <div>
-        {photo &&
-          photo.map(photos => (
-            <img src={photos.urls.regular} alt={photos.description}></img>
-          ))}
+        <div className="Grid" style={{ marginTop: "30px" }}>
+          {loaded
+            ? photo &&
+              photo.map((photos, index) => (
+                <UnsplashImage url={photos.urls.regular} key={index} />
+              ))
+            : ""}
+        </div>
       </div>
     </form>
   );
