@@ -34,7 +34,6 @@ export default function SearchBar() {
 
   const fetchAPI = (event, count = 7) => {
     event.preventDefault();
-    console.log("here bitch");
     let api = `${apiRoot}/search/photos/?client_id=${apiKey}&query=${query}&page=${Math.floor(
       Math.random() * 20
     ) + 1}&per_page=${count}`;
