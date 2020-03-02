@@ -19,11 +19,9 @@ export default function SearchBar() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [photo, setPhoto] = useState([]);
-  const [loaded, setIsLoaded] = React.useState(false);
 
   let Grid = () => {
     [photo, setPhoto] = React.useState([]);
-    [loaded, setIsLoaded] = React.useState(false);
 
     React.useEffect(() => {
       fetchAPI();
@@ -44,7 +42,7 @@ export default function SearchBar() {
       .then(response => response.json())
       .then(content => {
         console.log("content" + content.results[0].urls);
-        setIsLoaded(true);
+
         setPhoto(content.results);
       })
       .catch(e => {
@@ -65,7 +63,7 @@ export default function SearchBar() {
   //     });
   //     setPhoto(result);
   //   } catch (error) {
-  //     setError("Sorry, that photo doesn't exist.");
+  //     setError("Sorry, that photo doesn't exist.")
   //   }
   // };
 
@@ -90,12 +88,10 @@ export default function SearchBar() {
 
       <div>
         <div className="Grid" style={{ marginTop: "30px" }}>
-          {loaded
-            ? photo &&
-              photo.map((photos, index) => (
-                <UnsplashImage url={photos.urls.regular} key={index} />
-              ))
-            : ""}
+          {photo &&
+            photo.map((photos, index) => (
+              <UnsplashImage url={photos.urls.regular} key={index} />
+            ))}
         </div>
       </div>
     </form>
