@@ -1,6 +1,8 @@
 import React from "react";
 
 import "./Main.css";
+import SearchBar from "./SearchBar";
+import { usePalette } from 'react-palette';
 
 export default function Main() {
   return (

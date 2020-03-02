@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { usePalette } from 'react-palette'
+import Grid from "./Grid.js"
+import Config from "./config/config"
+
+
 
 import "./SearchBar.css";
 
@@ -9,47 +14,80 @@ function getId(query) {
   console.log(query);
 }
 
-const UnsplashImage = ({ url, key }) => (
-  <div className="image-item" key={key}>
+const UnsplashImage = ({ url, index}) => (
+  <div className="image-item" >
     <img src={url} />
   </div>
 );
 
+
+
 export default function SearchBar() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [photo, setPhoto] = useState([]);
+  const [photos, setPhotos] = useState([]);
 
-  let Grid = () => {
-    [photo, setPhoto] = React.useState([]);
+   useEffect(()=>{
+     console.log("useEffect in SearchBar")
+   },[])
 
-    React.useEffect(() => {
-      fetchAPI();
-    }, []);
-  };
-
-  const apiRoot = "https://api.unsplash.com";
-  const apiKey =
-    "a920466e5973644c09180f9583b9cb3b409c600d84fd46f025946ca2ebb23f7f";
+  const handleQueryChange = event => setQuery(event.target.value);
 
   const fetchAPI = (event, count = 7) => {
+    console.log("in fetchAPI")
     event.preventDefault();
-    let api = `${apiRoot}/search/photos/?client_id=${apiKey}&query=${query}&page=${Math.floor(
+    let api = `${Config.apiRoot}/search/photos/?client_id=${Config.apiKey}&query=${query}&page=${Math.floor(
       Math.random() * 20
     ) + 1}&per_page=${count}`;
     fetch(api)
       .then(response => response.json())
       .then(content => {
-        console.log("content" + content.results[0].urls);
 
-        setPhoto(content.results);
+        console.log("content" + content.results[0].urls.regular);
+
+        setPhotos(content.results);
       })
       .catch(e => {
         console.log(e);
       });
   };
 
-  const handleQueryChange = event => setQuery(event.target.value);
+
+    return (
+      <React.Fragment>
+        <form className="SearchForm" onSubmit={fetchAPI}>
+          <div className="SearchContent">
+            <input
+              id="Search"
+              name="query"
+              type="text"
+              autoComplete="off"
+              value={query}
+              onChange={handleQueryChange}
+              placeholder={"Search photos"}
+            />
+            <button id="SearchButton" type="button" disabled={!query}>
+              Search
+            </button>
+          </div>
+          {error && <div className="error">{error}</div>}
+           <div>
+             <div className="Grid" style={{ marginTop: "30px" }}>
+               {photos &&
+                 photos.map((photo, index) => (
+                   <UnsplashImage url={photo.urls.regular} key={index} />
+                 ))}
+             </div>
+           </div>
+        </form>
+
+
+      </React.Fragment>
+    );
+
+  };
+
+
 
   // const performQuery = async event => {
   //   event.preventDefault();
@@ -66,33 +104,10 @@ export default function SearchBar() {
   //   }
   // };
 
-  return (
-    <form className="SearchForm" onSubmit={fetchAPI}>
-      <div className="SearchContent">
-        <input
-          id="Search"
-          name="query"
-          type="text"
-          autoComplete="off"
-          value={query}
-          onChange={handleQueryChange}
-          placeholder={"Search photos"}
-        />
-        <button id="SearchButton" type="button" disabled={!query}>
-          Search
-        </button>
-      </div>
 
-      {error && <div className="error">{error}</div>}
-
-      <div>
-        <div className="Grid" style={{ marginTop: "30px" }}>
-          {photo &&
-            photo.map((photos, index) => (
-              <UnsplashImage url={photos.urls.regular} key={index} />
-            ))}
-        </div>
-      </div>
-    </form>
-  );
-}
+// const { data, loading, error } = usePalette(IMAGE_URL)
+//
+// <div style={{ color: data.vibrant }}>
+//   text with the vibrant color
+// </div>
+// removed this
