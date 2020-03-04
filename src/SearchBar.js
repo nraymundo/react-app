@@ -66,9 +66,7 @@ export default function SearchBar() {
               onChange={handleQueryChange}
               placeholder={"Search photos"}
             />
-            <button id="SearchButton" type="button" disabled={!query}>
-              Search
-            </button>
+            <input id="SearchButton" type="submit" value="GO"/>
           </div>
           {error && <div className="error">{error}</div>}
            <div>
