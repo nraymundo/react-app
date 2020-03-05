@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { usePalette } from "react-palette";
-import Grid from "./Grid.js";
-import { data } from "./config";
+import { data } from "./Config";
 
 import "./SearchBar.css";
 
@@ -16,10 +14,6 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
 
-  useEffect(() => {
-    console.log("useEffect in SearchBar");
-  }, []);
-
   const handleQueryChange = event => setQuery(event.target.value);
 
   const fetchAPI = (event, count = 7) => {
@@ -31,8 +25,6 @@ export default function SearchBar() {
     fetch(api)
       .then(response => response.json())
       .then(content => {
-        console.log("content" + content.results[0].urls.regular);
-
         setPhotos(content.results);
       })
       .catch(e => {
