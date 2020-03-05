@@ -20,17 +20,11 @@ export default function App() {
       <div className="Header">
         <Main />
       </div>
-      {/* {currDisplay === "carousel" && ( */}
       <div>
         <div className="SearchB">
           <SearchBar />
         </div>
-        <div>
-          <div className="HomeCarousel">{/* <PhotoCarousel /> */}</div>
-          {/*<Grid />*/}
-        </div>
       </div>
-      {/* )} */}
     </div>
   );
 }
