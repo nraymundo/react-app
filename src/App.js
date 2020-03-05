@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { usePalette } from 'react-palette';
+import { usePalette } from "react-palette";
 
 import Main from "./Main";
 import Home from "./Home";
@@ -18,11 +18,12 @@ export default function App() {
   return (
     <div className="App">
       <div className="Header">
+        <Main />
       </div>
       {/* {currDisplay === "carousel" && ( */}
       <div>
         <div className="SearchB">
-         <SearchBar />
+          <SearchBar />
         </div>
         <div>
           <div className="HomeCarousel">{/* <PhotoCarousel /> */}</div>
