@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { data } from "./Config";
+import PhotoCarousel from "./PhotoCarousel";
 
 import "./SearchBar.css";
 
@@ -13,6 +14,7 @@ export default function SearchBar() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [currDisplay, setCurrDisplay] = useState("carousel");
 
   const handleQueryChange = event => setQuery(event.target.value);
 
@@ -45,13 +47,19 @@ export default function SearchBar() {
             onChange={handleQueryChange}
             placeholder={"Search photos"}
           />
-          <input id="SearchButton" type="submit" value="GO" />
+          <input
+            id="SearchButton"
+            type="submit"
+            value="GO"
+            onClick={() => setCurrDisplay("search")}
+          />
         </div>
-        {error && <div className="error">{error}</div>}
-        <div>
+        {/* {error && <div className="error">{error}</div>} */}
+        <div className="renderContent">
+          <div>{currDisplay === "carousel" && <PhotoCarousel />}</div>
           <div className="Grid" style={{ marginTop: "30px" }}>
-            {photos &&
-              photos.map((photo, index) => (
+            {currDisplay === "search" &&
+              photos?.map((photo, index) => (
                 <UnsplashImage url={photo.urls.regular} key={index} />
               ))}
           </div>
