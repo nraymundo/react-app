@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { data } from "./Config";
 import React, { useState, useEffect } from "react";
+import { data } from "./Config";
 import "./Grid.css";
 
 const UnsplashImage = ({ url, key }) => (
@@ -13,13 +12,12 @@ let Grid = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect in Grid")
+    console.log("useEffect in Grid");
     fetchImages();
   }, []);
 
   const fetchImages = (count = 7) => {
-    console.log("fetchImages entry", images )
-    const apiRoot = "https://api.unsplash.com";
+    console.log("fetchImages entry", images);
     const apiKey = "14c7hKqujvRayBTzClblkcKG2m8OnxQaJRvnx3Y1b9U";
 
     fetch(
@@ -30,13 +28,16 @@ let Grid = () => {
       })
       .then(data => {
         setImages([...images, ...data]);
-        setIsLoaded(true);
         console.log(data);
-    fetch(`${apiRoot}/photos/random?client_id=${apiKey}&count=${count}`)
+      });
+
+    fetch(
+      `${data.REACT_APP_API_URL}/photos/random?client_id=${data.REACT_APP_API_KEY}&count=${count}`
+    )
       .then(response => response.json())
       .then(data => {
-        setImages([ ...images, ...data]);
-    })
+        setImages([...images, ...data]);
+      })
       .catch(e => {
         console.log("Fetch error", e);
       });
@@ -44,11 +45,13 @@ let Grid = () => {
 
   return (
     <div className="Grid" style={{ marginTop: "30px" }}>
-    {console.log("inside return ", images)}
-      {images && images.map((image, index) => (
-            <UnsplashImage url={image.urls.regular} key={index} />
-          ))}
+      {console.log("inside return ", images)}
+      {images &&
+        images.map((image, index) => (
+          <UnsplashImage url={image.urls.regular} key={index} />
+        ))}
     </div>
   );
 };
+
 export default Grid;
