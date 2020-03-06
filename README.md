@@ -1,6 +1,7 @@
-# shoot.
+# [MoodMi] - Nicolas Raymundo, Megan Reyes, and Amanda Marques
+A digital, aesthetically pleasing moodboard! Enter a word that describes your mood to create your board or click the smiley button to generate a random one.
 
-## Nicolas Raymundo, Megan Reyes, and Amanda Marques
+![demo](https://github.com/nraymundo/react-app/blob/secondary-branch/demo.png)
 
 To run the application from your computer, please:
 
