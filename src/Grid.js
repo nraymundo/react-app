@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { data } from "./Config";
 import "./Grid.css";
 
 const UnsplashImage = ({ url, key }) => (
@@ -17,17 +18,18 @@ let Grid = () => {
 
   const fetchImages = (count = 7) => {
     const apiRoot = "https://api.unsplash.com";
-    const apiKey =
-      "a920466e5973644c09180f9583b9cb3b409c600d84fd46f025946ca2ebb23f7f";
+    const apiKey = "14c7hKqujvRayBTzClblkcKG2m8OnxQaJRvnx3Y1b9U";
 
-    fetch(`${apiRoot}/photos/random?client_id=${apiKey}&count=${count}`)
+    fetch(
+      `${data.REACT_APP_API_URL}photos/random?client_id=${data.REACT_APP_API_KEY}&count=${count}`
+    )
       .then(response => {
         return response.json();
       })
       .then(data => {
         setImages([...images, ...data]);
         setIsLoaded(true);
-        console.log(images);
+        console.log(data);
       })
       .catch(e => {
         console.log("Fetch error", e);
