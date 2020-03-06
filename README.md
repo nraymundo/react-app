@@ -3,7 +3,6 @@ A digital, aesthetically pleasing moodboard! Enter a word that describes your mo
 
 ![demo](https://github.com/nraymundo/react-app/blob/secondary-branch/demo.png)
 
-
 To run the application from your computer, please:
 
 1. Clone or download the repository to your computer.

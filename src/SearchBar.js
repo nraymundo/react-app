@@ -33,7 +33,7 @@ export default function SearchBar() {
         console.log(e);
       });
   };
-
+  
   const fetchAPI = (event, count = 7) => {
     event.preventDefault();
     let api = `${data.REACT_APP_API_URL}search/photos/?client_id=${
@@ -104,6 +104,36 @@ export default function SearchBar() {
           </div>
         </form>
       </div>
+
+      <form className="SearchForm" onSubmit={fetchAPI}>
+        <div className="SearchContent">
+          <input
+            id="Search"
+            name="query"
+            type="text"
+            autoComplete="off"
+            value={query}
+            onChange={handleQueryChange}
+            placeholder={"Search photos"}
+          />
+          <input
+            id="SearchButton"
+            type="submit"
+            value="GO"
+            onClick={() => setCurrDisplay("search")}
+          />
+        </div>
+        {/* {error && <div className="error">{error}</div>} */}
+        <div className="renderContent">
+          <div>{currDisplay === "carousel" && <PhotoCarousel />}</div>
+          <div className="Grid" style={{ marginTop: "30px" }}>
+            {currDisplay === "search" &&
+              photos?.map((photo, index) => (
+                <UnsplashImage url={photo.urls.regular} key={index} />
+              ))}
+          </div>
+        </div>
+      </form>
     </React.Fragment>
   );
 }
