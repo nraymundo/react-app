@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "angular": "^1.7.9",
+    "angular": "^1.8.0",
     "bootstrap": "^4.4.1",
     "bulma": "^0.8.0",
     "config": "^3.3.0",
